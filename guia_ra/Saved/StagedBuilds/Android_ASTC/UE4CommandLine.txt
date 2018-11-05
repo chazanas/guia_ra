@@ -1,1 +1,1 @@
-../../../guia_ra/guia_ra.uproject  /Game/HandheldARBP/Maps/HandheldARBlankMap -Messaging -SessionId=8CF589C744DDC05BAD7D18B4F3269DB3 -SessionOwner="plnch" -SessionName="Launch On Device" -iterative
+../../../guia_ra/guia_ra.uproject  /Game/HandheldARBP/Maps/HandheldARBlankMap -Messaging -SessionId=F91929C7444983A1B1EDFD9C54576480 -SessionOwner="plnch" -SessionName="Launch On Device" -iterative
