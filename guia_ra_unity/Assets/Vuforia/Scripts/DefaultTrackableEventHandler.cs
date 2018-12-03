@@ -32,6 +32,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
 
     //------------Begin Sound----------
     public AudioSource soundTarget;
+    public bool audioStarted;
     public AudioClip clipTarget; 
     private AudioSource[] allAudioSources;
 
@@ -53,6 +54,8 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         soundTarget.loop = false;
         soundTarget.playOnAwake = false;
         soundTarget.Play();
+        audioStarted = true;
+        
     }
 
     //-----------End Sound------------
@@ -64,6 +67,14 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         if (mTrackableBehaviour)
             mTrackableBehaviour.RegisterTrackableEventHandler(this);
         soundTarget = (AudioSource)gameObject.AddComponent<AudioSource>();
+        audioStarted = false;
+    }
+
+    protected virtual void Update() 
+    {
+        if (!soundTarget.isPlaying && audioStarted) {
+            OnTrackingLost();
+        }
     }
 
     protected virtual void OnDestroy()
@@ -115,6 +126,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
 
     protected virtual void OnTrackingFound()
     {
+        print("oooi");
         var rendererComponents = GetComponentsInChildren<Renderer>(true);
         var colliderComponents = GetComponentsInChildren<Collider>(true);
         var canvasComponents = GetComponentsInChildren<Canvas>(true);
@@ -137,11 +149,11 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         if (mTrackableBehaviour.TrackableName == "sgt")
         {
             playSound("sounds/sgt");
-        }
-
-        if (mTrackableBehaviour.TrackableName == "guernica")
+        } else if (mTrackableBehaviour.TrackableName == "guernica")
         {
             playSound("sounds/guernica");
+        } else if (mTrackableBehaviour.TrackableName == "goya") {
+            playSound("sounds/goya");
         }
 
 
@@ -166,6 +178,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         foreach (var component in canvasComponents)
             component.enabled = false;
 
+        audioStarted = false;
         StopAllAudio();
     }
 
