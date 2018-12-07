@@ -153,7 +153,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         {
             playSound("sounds/guernica");
         } else if (mTrackableBehaviour.TrackableName == "goya") {
-            playSound("sounds/goya");
+            playSound("sounds/goya2");
         }
 
 
